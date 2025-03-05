@@ -3,6 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -10,49 +24,40 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link href="./styles/output.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./styles/output.css" />
+
     <title>UniwersoTech Sobremesas</title>
   </head>
-  <body class="bg-[#d7f1f2]">
-    <header class="relative">
-      <div class="relative h-[420px] overflow-hidden">
-        <div class="absolute inset-0">
-          <img
-            src="./assets/img/bg-header.png"
-            alt="Sorveteria"
-            class="w-full h-full object-cover"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/70"
-          ></div>
-        </div>
 
-        <div class="relative h-full flex flex-col justify-center items-center">
-          <img
-            src="./assets/img/logo.png"
-            alt="Logo"
-            class="w-35 h-35 rounded-full shadow-lg hover:scale-110 duration-200"
-          />
+  <body>
+    <header class="w-full h-[420px] bg-header bg-cover bg-center bg-no-repeat">
+      <div class="w-full h-full flex flex-col justify-center items-center">
+        <img
+          src="./assets/img/logo.png"
+          alt="Logo"
+          class="w-32 h-32 rounded-full border-4 hover:-rotate-2 duration-300"
+        />
+        <h1 class="text-3xl mt-4 mb-2 font-bold text-white text-center">
+          Uniwersotech Sobremesas
+        </h1>
 
-          <h1 class="text-3xl mt-4 mb-2 font-bold text-white text-center">
-            Uniwersotech Sobremesas
-          </h1>
+        <span class="font-medium text-white">
+          Rua 10 de Janeiro, Ubajara - CE
+        </span>
 
-          <span class="font-medium text-white">
-            Rua 10 de Janeiro, Ubajara - CE
+        <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
+          <span class="text-white font-medium">
+            Segunda a Domingo - 18h as 22h
           </span>
-
-          <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
-            <span class="text-white font-medium">
-              Segunda a Domingo - 18h as 22h
-            </span>
-          </div>
         </div>
       </div>
     </header>
+
     <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">
       Conheça nossas Sobremesas
     </h2>
+
     <div id="menu">
       <main
         class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16"
@@ -394,30 +399,56 @@
       </div>
     </div>
 
-    <div>
-      <div>
-        <h2>Meu carrinho</h2>
-        <div></div>
-        <p>Total: <span> R$ 0.00</span></p>
-        <p>Endereço de entrega:</p>
-        <input type="text" placeholder="Digite seu endereco completo" />
-        <p>Digite seu endereço completo</p>
-        <div>
-          <button>Fechar</button>
-          <button>Finalizar Pedido</button>
+    <div
+      class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] hidden items-center justify-center"
+      id="cart-modal"
+    >
+      <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+        <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
+
+        <div id="cart-itens" class="flex justify-between mb-2 flex-col"></div>
+
+        <p class="font-bold">Total: <span id="cart-total">0.00</span></p>
+
+        <p class="font-bold mt-4">Endereço de entrega:</p>
+
+        <input
+          type="text"
+          placeholder="Digite seu endereco completo"
+          id="address"
+          class="w-full border-2 p-1 rounded my-1"
+        />
+
+        <p class="text-red-500 hidden" id="address-warn">
+          Digite seu endereço completo
+        </p>
+
+        <div class="flex items-center justify-between mt-5 w-full">
+          <button id="close-modal-btn">Fechar</button>
+          <button
+            id="checkout-btn"
+            class="bg-green-500 text-white px-4 py-1 rounded"
+          >
+            Finalizar Pedido
+          </button>
         </div>
       </div>
     </div>
 
     <footer
-      class="bg-[#f95c99] w-full py-3 fixed bottom-0 z-40 flex items-center justify-center"
+      class="bg-[#f95c99] w-full h-12 fixed bottom-0 z-40 flex items-center justify-center shadow-md"
     >
       <button
-        class="flex items-center gap-2 text-white font-bold"
+        class="flex items-center gap-2 text-white font-bold text-base hover:scale-105 transition-all duration-300 bg-white/10 px-3 py-1.5 rounded-full hover:bg-white/20"
         id="cart-btn"
       >
-        <i class="fa-solid fa-cart-plus text-lg text-white"> </i>
-        Meu carrinho - [<span id="cart-count"> 0 </span>]
+        <i class="fa-solid fa-cart-plus text-lg text-white"></i>
+        <span>Meu carrinho</span>
+        <span
+          class="bg-white text-[#f95c99] px-2 py-0.5 rounded-full font-bold text-sm shadow-sm"
+          id="cart-count"
+          >0</span
+        >
       </button>
     </footer>
   </body>
