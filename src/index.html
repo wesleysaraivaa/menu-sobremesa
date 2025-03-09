@@ -42,25 +42,33 @@
           Uniwersotech Sobremesas
         </h1>
 
-        <span class="font-medium text-white">
-          Rua 10 de Janeiro, Ubajara - CE
-        </span>
-
-        <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
-          <span class="text-white font-medium">
-            Segunda a Domingo - 18h as 22h
-          </span>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-location-dot" style="color: #ffffff"></i>
+          <p class="text-white font-medium">Rua 10 de Janeiro, Ubajara - CE</p>
         </div>
+
+        <span
+          class="text-white font-medium flex items-center gap-2 bg-green-600 px-4 py-1 rounded-full mt-5"
+          id="date-span"
+        >
+          <i class="fa-solid fa-clock" style="color: #ffffff"></i>
+          Segunda a Domingo - 18h as 22h
+        </span>
       </div>
     </header>
 
-    <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">
-      Conheça nossas Sobremesas
-    </h2>
+    <div class="flex justify-center px-4 mb-8 mt-8">
+      <h2
+        class="text-2xl md:text-3xl font-bold text-center bg-pink-200 rounded-full px-2"
+      >
+        Experimente nossas delicias, preparadas com ingredientes frescos e muito
+        carinho.
+      </h2>
+    </div>
 
     <div id="menu">
       <main
-        class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16"
+        class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2"
       >
         <div class="flex gap-2">
           <img
@@ -282,9 +290,14 @@
           </div>
         </div>
       </main>
-      <div class="text-center mx-auto max-w-7xl px-2 my-2">
-        <h2 class="text-2xl md:text-3xl font-bold mt-9 mb-6">Bebidas</h2>
+      <div class="flex justify-center px-4 mb-8 mt-8">
+        <h2
+          class="text-2xl md:text-3xl font-bold text-center bg-pink-200 rounded-full px-4"
+        >
+          Bebidas
+        </h2>
       </div>
+
       <div
         class="grid grid-cols-1 md:grid-cols-2 gap-7 md-gap-10 mx-auto max-w-7xl px-2 mb-16"
         id="menu"
