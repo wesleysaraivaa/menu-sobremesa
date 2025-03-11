@@ -15,9 +15,12 @@ cartBtn.addEventListener("click", function () {
 });
 
 //fechar modal do carrinho
-cartBtn /
-  addEventListener("click", function (event) {
-    if (event.target == cartModal) {
-      cartModal.style.display = "none";
-    }
-  });
+cartBtn.addEventListener("click", function (event) {
+  if (event.target == cartModal) {
+    cartModal.style.display = "none";
+  }
+});
+
+closeModalBtn.addEventListener("click", function () {
+  cartModal.style.display = "none";
+});
