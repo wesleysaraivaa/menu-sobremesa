@@ -117,3 +117,83 @@ function removeItemCart(name) {
     updateCartModal();
   }
 }
+
+addressInput.addEventListener("input", function (event) {
+  let inputValue = event.target.value;
+
+  if (inputValue != "") {
+    addressInput.classList.remove("border-red-500");
+    addressWarn.classList.add("hidden");
+  }
+});
+
+checkoutBtn.addEventListener("click", function () {
+  const isOpen = checkOpen();
+  if (!isOpen) {
+    Toastify({
+      text: "NO MOMENTO ESTAMOS FECHADOS!",
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "left",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+      },
+    }).showToast();
+    return;
+  }
+
+  if (cart.length === 0) return;
+  if (addressInput.value == "") {
+    addressWarn.classList.remove("hidden");
+    addressInput.classList.add("border-red-500");
+    return;
+  }
+
+  const cartItems = cart
+    .map((item) => {
+      return `Qtd: ${item.quantity} - ${item.name} |  Preço: R$ ${item.price}`;
+    })
+    .join("\n");
+
+  const totalCartValue = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const totalmsg = `\n\nTotal: R$ ${totalCartValue.toFixed(2)}`;
+
+  const address = addressInput.value
+    ? `\n\nEndereço: ${addressInput.value}`
+    : "";
+
+  const message = encodeURIComponent(`${cartItems}${address}${totalmsg}`);
+  const phone = "+5588997130026";
+
+  window.open(`https://wa.me/${phone}?text=${message} `, "_blank");
+
+  cart.length = 0;
+  updateCartModal();
+});
+
+function checkOpen() {
+  const data = new Date();
+  const hora = data.getHours();
+  return hora >= 18 && hora < 19;
+}
+
+const spanItem = document.getElementById("date-span");
+const isOpen = checkOpen();
+
+if (isOpen) {
+  spanItem.classList.remove("bg-red-500");
+  spanItem.classList.add("bg-green-600");
+} else {
+  spanItem.classList.remove("bg-green-600");
+  spanItem.classList.add("bg-red-500");
+  const IsClosed = document.createElement("span");
+  IsClosed.classList.add("text-white", "font-medium");
+  IsClosed.innerText = "ESTAMOS FECHADO";
+  spanItem.appendChild(IsClosed);
+}
