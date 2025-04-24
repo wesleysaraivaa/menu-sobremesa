@@ -8,6 +8,8 @@ const closeModalBtn = document.getElementById("close-modal-btn");
 const cartCount = document.getElementById("cart-count");
 const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
+const nameInput = document.getElementById("name");
+const nameWarn = document.getElementById("name-warn");
 
 let cart = [];
 
@@ -118,6 +120,15 @@ function removeItemCart(name) {
   }
 }
 
+nameInput.addEventListener("input", function (event) {
+  let inputValue = event.target.value;
+
+  if (inputValue != "") {
+    nameInput.classList.remove("border-red-500");
+    nameWarn.classList.add("hidden");
+  }
+});
+
 addressInput.addEventListener("input", function (event) {
   let inputValue = event.target.value;
 
@@ -145,9 +156,16 @@ checkoutBtn.addEventListener("click", function () {
   }
 
   if (cart.length === 0) return;
+
   if (addressInput.value == "") {
     addressWarn.classList.remove("hidden");
     addressInput.classList.add("border-red-500");
+    return;
+  }
+
+  if (nameInput.value == "") {
+    nameWarn.classList.remove("hidden");
+    nameInput.classList.add("border-red-500");
     return;
   }
 
@@ -164,11 +182,15 @@ checkoutBtn.addEventListener("click", function () {
 
   const totalmsg = `\n\nTotal: R$ ${totalCartValue.toFixed(2)}`;
 
+  const name = nameInput.value ? `\n\nNome: ${nameInput.value}` : "";
+
   const address = addressInput.value
     ? `\n\nEndereço: ${addressInput.value}`
     : "";
 
-  const message = encodeURIComponent(`${cartItems}${address}${totalmsg}`);
+  const message = encodeURIComponent(
+    `${cartItems}${name}${address}${totalmsg}`
+  );
   const phone = "+5588997130026";
 
   window.open(`https://wa.me/${phone}?text=${message} `, "_blank");

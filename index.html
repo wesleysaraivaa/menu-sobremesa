@@ -421,11 +421,21 @@
 
         <p class="font-bold mt-4">Total: <span id="cart-total">0.00</span></p>
 
+        <p class="font-bold mt-4">Nome:</p>
+        <input
+          type="text"
+          id="name"
+          placeholder="Seu nome"
+          class="w-full border-2 p-1 rounded my-1"
+        />
+
+        <p class="text-red-500 hidden" id="name-warn">Digite seu nome</p>
+
         <p class="font-bold mt-4">Endereço de entrega:</p>
 
         <input
           type="text"
-          placeholder="Digite seu endereco completo"
+          placeholder="(Rua, Número, Bairro, Cidade, Ponto de referência)"
           id="address"
           class="w-full border-2 p-1 rounded my-1"
         />
@@ -433,6 +443,18 @@
         <p class="text-red-500 hidden" id="address-warn">
           Digite seu endereço completo
         </p>
+
+        <p class="font-bold mt-4">Método de pagamento:</p>
+        <div class="flex items-center gap-2">
+          <input type="radio" name="payment" id="pix" class="w-4 h-4" />
+          <label for="pix">Pix</label>
+          <input type="radio" name="payment" id="credit-card" class="w-4 h-4" />
+          <label for="credit-card">Cartão de Crédito</label>
+          <input type="radio" name="payment" id="debit-card" class="w-4 h-4" />
+          <label for="debit-card">Cartão de Débito</label>
+          <input type="radio" name="payment" id="cash" class="w-4 h-4" />
+          <label for="cash">Dinheiro</label>
+        </div>
 
         <div class="flex items-center justify-between mt-5 w-full">
           <button id="close-modal-btn">Fechar</button>
