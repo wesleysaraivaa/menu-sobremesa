@@ -106,7 +106,7 @@ function updateCartModal() {
 }
 
 cartItemsContainer.addEventListener("click", function (event) {
-  const target = event.target.closest('button');
+  const target = event.target.closest("button");
   if (!target) return;
 
   if (target.classList.contains("add-to-cart-btn")) {
@@ -258,7 +258,7 @@ checkoutBtn.addEventListener("click", function () {
 function checkOpen() {
   const data = new Date();
   const hora = data.getHours();
-  return hora >= 18 && hora < 23;
+  return hora >= 17 && hora < 23;
 }
 
 const spanItem = document.getElementById("date-span");
