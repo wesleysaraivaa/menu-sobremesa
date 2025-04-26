@@ -77,10 +77,17 @@ function updateCartModal() {
                       2
                     )} </p>
                 </div>
-                <div>
-                    <button class="remove-from-cart-btn text-red-600" data-name="${
+                <div class="flex items-center gap-2">
+                    <button class="add-to-cart-btn text-green-600 hover:text-green-700 transition-colors duration-300" data-name="${
                       item.name
-                    }"> Remover </button>
+                    }">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="remove-from-cart-btn text-red-600 hover:text-red-700 transition-colors duration-300" data-name="${
+                      item.name
+                    }"> 
+                        <i class="fas fa-minus"></i>
+                    </button>
                 </div>
             </div>
         `;
@@ -99,11 +106,25 @@ function updateCartModal() {
 }
 
 cartItemsContainer.addEventListener("click", function (event) {
-  if (event.target.classList.contains("remove-from-cart-btn")) {
-    const name = event.target.getAttribute("data-name");
+  const target = event.target.closest('button');
+  if (!target) return;
+
+  if (target.classList.contains("add-to-cart-btn")) {
+    const name = target.getAttribute("data-name");
+    addUndItemCart(name);
+  } else if (target.classList.contains("remove-from-cart-btn")) {
+    const name = target.getAttribute("data-name");
     removeItemCart(name);
   }
 });
+
+function addUndItemCart(name) {
+  const existingItem = cart.find((item) => item.name === name);
+  if (existingItem) {
+    existingItem.quantity += 1;
+    updateCartModal();
+  }
+}
 
 function removeItemCart(name) {
   const index = cart.findIndex((item) => item.name === name);
@@ -140,31 +161,34 @@ addressInput.addEventListener("input", function (event) {
   }
 });
 
-document.querySelectorAll('input[name="payment"]').forEach(radio => {
-    radio.addEventListener('change', function() {
-        if (this.value === 'Pagamento Pix') {
-            copyPixBtn.classList.remove("hidden");
-        } else {
-            copyPixBtn.classList.add("hidden");
-        }
-    });
+document.querySelectorAll('input[name="payment"]').forEach((radio) => {
+  radio.addEventListener("change", function () {
+    if (this.value === "Pagamento Pix") {
+      copyPixBtn.classList.remove("hidden");
+    } else {
+      copyPixBtn.classList.add("hidden");
+    }
+  });
 });
 
-copyPixBtn.addEventListener('click', function() {
-    const pixKey = "0000000000000000";
-    navigator.clipboard.writeText(pixKey).then(() => {
-        Toastify({
-            text: "Chave Pix copiada! Agora envie o comprovante pelo WhatsApp",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
-            },
-        }).showToast();
-    }).catch(err => {
-        console.error('Erro ao copiar: ', err);
+copyPixBtn.addEventListener("click", function () {
+  const pixKey = "0000000000000000";
+  navigator.clipboard
+    .writeText(pixKey)
+    .then(() => {
+      Toastify({
+        text: "Chave Pix copiada! Agora envie o comprovante pelo WhatsApp",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+      }).showToast();
+    })
+    .catch((err) => {
+      console.error("Erro ao copiar: ", err);
     });
 });
 
