@@ -40,8 +40,6 @@
     carinho."
     />
     <meta property="og:site_name" content="UniwersoTech Sobremesas" />
-    <link rel="stylesheet" href="./styles/output.css" />
-
     <link rel="stylesheet" href="./src/styles/output.css" />
 
     <title>UniwersoTech Sobremesas</title>
@@ -446,14 +444,44 @@
 
         <p class="font-bold mt-4">Método de pagamento:</p>
         <div class="flex items-center gap-2">
-          <input type="radio" name="payment" id="pix" class="w-4 h-4" />
-          <label for="pix">Pix</label>
-          <input type="radio" name="payment" id="credit-card" class="w-4 h-4" />
-          <label for="credit-card">Cartão de Crédito</label>
-          <input type="radio" name="payment" id="debit-card" class="w-4 h-4" />
-          <label for="debit-card">Cartão de Débito</label>
-          <input type="radio" name="payment" id="cash" class="w-4 h-4" />
-          <label for="cash">Dinheiro</label>
+          <input
+            type="radio"
+            name="payment"
+            value="Pagamento Pix"
+            class="w-4 h-4"
+            id="pix"
+          />
+          <label>Pix</label>
+          <input
+            type="radio"
+            name="payment"
+            value="Pagamento Cartão de Crédito"
+            class="w-4 h-4"
+          />
+          <label>Cartão de Crédito</label>
+          <input
+            type="radio"
+            name="payment"
+            value="Pagamento Cartão de Débito"
+            class="w-4 h-4"
+          />
+          <label>Cartão Débito</label>
+          <input
+            type="radio"
+            name="payment"
+            value="Pagamento Dinheiro"
+            class="w-4 h-4"
+          />
+          <label>Dinheiro</label>
+        </div>
+
+        <div class="flex items-center justify-center mt-4">
+          <button
+            id="copy-pix-btn"
+            class="hidden bg-green-500 text-white px-2 py-1 rounded ml-2"
+          >
+            <i class="fas fa-copy"></i> Copiar Chave Pix
+          </button>
         </div>
 
         <div class="flex items-center justify-between mt-5 w-full">

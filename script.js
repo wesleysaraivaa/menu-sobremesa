@@ -10,6 +10,8 @@ const addressInput = document.getElementById("address");
 const addressWarn = document.getElementById("address-warn");
 const nameInput = document.getElementById("name");
 const nameWarn = document.getElementById("name-warn");
+const pixRadio = document.getElementById("pix");
+const copyPixBtn = document.getElementById("copy-pix-btn");
 
 let cart = [];
 
@@ -138,6 +140,34 @@ addressInput.addEventListener("input", function (event) {
   }
 });
 
+document.querySelectorAll('input[name="payment"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        if (this.value === 'Pagamento Pix') {
+            copyPixBtn.classList.remove("hidden");
+        } else {
+            copyPixBtn.classList.add("hidden");
+        }
+    });
+});
+
+copyPixBtn.addEventListener('click', function() {
+    const pixKey = "0000000000000000";
+    navigator.clipboard.writeText(pixKey).then(() => {
+        Toastify({
+            text: "Chave Pix copiada! Agora envie o comprovante pelo WhatsApp",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
+    }).catch(err => {
+        console.error('Erro ao copiar: ', err);
+    });
+});
+
 checkoutBtn.addEventListener("click", function () {
   const isOpen = checkOpen();
   if (!isOpen) {
@@ -182,6 +212,8 @@ checkoutBtn.addEventListener("click", function () {
 
   const totalmsg = `\n\nTotal: R$ ${totalCartValue.toFixed(2)}`;
 
+  const method = document.querySelector("input[name='payment']:checked").value;
+
   const name = nameInput.value ? `\n\nNome: ${nameInput.value}` : "";
 
   const address = addressInput.value
@@ -189,7 +221,7 @@ checkoutBtn.addEventListener("click", function () {
     : "";
 
   const message = encodeURIComponent(
-    `${cartItems}${name}${address}${totalmsg}`
+    `${cartItems}${name}${address}${totalmsg}\n\n${method}`
   );
   const phone = "+5588997130026";
 
