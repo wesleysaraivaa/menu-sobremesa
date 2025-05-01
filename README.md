@@ -1,6 +1,6 @@
 # 🍰 Menu de Sobremesas - UniwersoTech
 
-Um sistema web moderno para exibição e gerenciamento de pedidos de sobremesas, desenvolvido para a UniwersoTech.
+Um sistema web moderno para exibição e gerenciamento de pedidos de sobremesas.
 
 ## 📋 Funcionalidades
 
@@ -86,4 +86,4 @@ O projeto é totalmente responsivo e se adapta a diferentes tamanhos de tela:
 - Tablet
 - Dispositivos móveis
 
-Desenvolvido pelo video do Sujeito Programador.
+Projeto desenvolvido pela ideia de um projeto de um menu de hamburgueria de um video do Sujeito Programador, porém, agora adaptado para um menu de sobremesas.
