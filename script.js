@@ -225,7 +225,7 @@ checkoutBtn.addEventListener("click", function () {
 
   const cartItems = cart
     .map((item) => {
-      return `Qtd: ${item.quantity} - ${item.name} |  Preço: R$ ${item.price}`;
+      return `• ${item.quantity}x ${item.name} - R$ ${item.price}`;
     })
     .join("\n");
 
@@ -245,11 +245,11 @@ checkoutBtn.addEventListener("click", function () {
     : "";
 
   const message = encodeURIComponent(
-    `${cartItems}${name}${address}${totalmsg}\n\n${method}`
+    `*PEDIDO DE SOBREMESAS*\n\n${cartItems}${name}${address}${totalmsg}\n\nForma de Pagamento: ${method}`
   );
   const phone = "+5588997130026";
 
-  window.open(`https://wa.me/${phone}?text=${message} `, "_blank");
+  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
   cart.length = 0;
   updateCartModal();
@@ -258,7 +258,8 @@ checkoutBtn.addEventListener("click", function () {
 function checkOpen() {
   const data = new Date();
   const hora = data.getHours();
-  return hora >= 17 && hora < 23;
+  const minutos = data.getMinutes();
+  return hora >= 17 && (hora < 23 || (hora === 23 && minutos <= 30));
 }
 
 const spanItem = document.getElementById("date-span");
